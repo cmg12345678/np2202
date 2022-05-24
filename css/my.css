@@ -1,0 +1,16 @@
+.xxx {
+    position: absolute;
+    list-style: none;
+    width: 300px;
+    height: 243px;
+    /* background-color: #06c; */
+    right: 260px;
+    top: 210px;
+}
+
+.xxx>li {
+    padding-left: 10px;
+    height: 80px;
+    line-height: 80px;
+    font-size: 14px;
+}

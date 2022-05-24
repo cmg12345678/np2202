@@ -8,7 +8,8 @@
     <link href="css/common.css" rel="stylesheet" />
     <link href="css/themes.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
-    <title>Document</title>
+    <link rel="stylesheet" href="./css/my.css">
+    <title>注册</title>
 </head>
 
 <body>
@@ -31,6 +32,45 @@
             <a href="" class="search right">搜索</a>
         </div>
     </header>
+    <!-- 注册 -->
+    <section class="report-box regMain">
+        <div class="wrap regBox">
+            <h2 class="title">注册极果</h2>
+            <form class="regForm" name="my_f1" action="./use/dl.html" onsubmit="check();">
+                <p>
+                    <input type="text" placeholder="请输入登录手机号" pattern="^1[34578][0-9]{9}$" required="required"
+                        name="tel" id="t1" /><span id="span1"></span>
+                </p>
+
+                <p>
+                    <input type="text" placeholder="请输入图片校验码" required="required" name="imgCode" id="t2" />
+                    <img src="img/imgCode.jpg" width="132" height="35" />
+                </p>
+
+                <p>
+                    <input type="text" placeholder="请输入4位数字验证码" pattern="^\d{4}$" required="required" name="code"
+                        id="t3" />
+                    <a href="javascript:void(0)" class="getCode">获取验证码</a>
+                </p>
+
+                <p><input type="text" placeholder="请输入用户名" required="required" id="t4" /></p>
+
+                <p><input type="password" placeholder="请输入新密码" required="required" name="psw1" id="t5" /></p>
+
+                <p><input type="password" placeholder="确定新密码" required="required" name="psw2" id="t6" /></p>
+
+                <p><button id="submit">立即注册</button></p>
+            </form>
+        </div>
+    </section>
+    <ul class="xxx">
+        <li class="xx"></li>
+        <li class="xx"></li>
+        <li class="xx"></li>
+        <li class="xx"></li>
+        <li class="xx"></li>
+        <li class="xx"></li>
+    </ul>
     <!--底部-->
     <footer class="foot">
         <section class="wrap">
@@ -78,6 +118,10 @@
             <p class="copy">© 2016 极果版权所有</p>
         </section>
     </footer>
+
+
 </body>
 
 </html>
+<script src="./js/Mycookie.js"></script>
+<script src="./js/zc.js"></script>

@@ -1,0 +1,11 @@
+.a {
+    display: inline-block;
+    width: 130px;
+    height: 30px;
+    background: url(./img/loading-icon.gif) no-repeat 1px 3px;
+    position: relative;
+    left: 431px;
+    top: 0px;
+    color: #fe5341;
+    display: none;
+}

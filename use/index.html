@@ -1,14 +1,13 @@
-<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>试用-大众试用</title>
     <link href="../css/common.css" rel="stylesheet" />
     <link href="../css/themes.css" rel="stylesheet" />
     <link href="../css/style.css" rel="stylesheet" />
-    <title>Document</title>
+    <link rel="stylesheet" href="../css/zh.css">
 </head>
 
 <body>
@@ -23,7 +22,7 @@
                     <li><a href="../index.html">首页</a></li>
                     <li><a href="../play/index.html">酷玩</a></li>
                     <li><a href="../guid/index.html">导购</a></li>
-                    <li class="on"><a href="../use/index.html">试用</a></li>
+                    <li class="on"><a href="javascript:void(0);">试用</a></li>
                     <li><a href="../report/index.html">报告</a></li>
                 </ul>
             </nav>
@@ -31,6 +30,49 @@
             <a href="" class="search right">搜索</a>
         </div>
     </header>
+    <!--酷玩top-->
+    <section class="wrap play-top">
+        <h1>免费试用</h1>
+        <nav class="play-nav">
+            <a href="javascript:void(0);" class="on">大众试用</a>
+            <a href="tys.html">体验师专享</a>
+        </nav>
+    </section>
+    <section class="use-box">
+        <div class="wrap use-nav">
+            <a href="javascript:void(0);" class="on">全部</a>
+            <a href="sq.html">申请中</a>
+            <a href="sy.html">试用中</a>
+            <a href="end.html">已结束</a>
+        </div>
+    </section>
+    <!--免费试用-->
+    <section class="report-box">
+        <div class="wrap use common pad25">
+            <dl>
+                <dt>
+                    <a href="detail.html">
+                        <span class="top-tip shoufa">首发</span>
+                        <img src="../img/hot5.jpg" width="220" height="130" />
+                        <div class="hot-con">
+                            <h2 class="name">巴慕达 The Toaster 烤面包机</h2>
+                            <p class="tabs graw">
+                                <span>2032</span>
+                                <span>20台</span>
+                            </p>
+                            <p class="sq"><span>1392</span>申请</p>
+                            <p class="current graw">报告数量：8</p>
+                        </div>
+                    </a>
+                </dt>
+            </dl>
+            <div class="playMore">
+                <a href="javascript:void(0);" class="more-btn" id="use-btn">向下拉加载更多</a>
+                <a href="#" class="a">正在加载中</a>
+            </div>
+
+        </div>
+    </section>
     <!--底部-->
     <footer class="foot">
         <section class="wrap">
@@ -81,3 +123,91 @@
 </body>
 
 </html>
+
+<script>
+    var data = []
+    function fn() {
+        var ajax_ = new XMLHttpRequest() || new ActiveXObject('Microsoft.XMLHTTP')
+        ajax_.open('get', 'http://localhost:3000/useing/master')
+        ajax_.send()
+        ajax_.onreadystatechange = function () {
+            if (ajax_.readyState == 4) {
+                if (ajax_.status == 200) {
+                    //获取JSON里边的list数据赋值给 data
+                    data = JSON.parse(ajax_.responseText)
+                    console.log(data);
+                    //调用render函数渲染数据
+                    render(data)
+                }
+            }
+        }
+    }
+
+
+    function render(data_) {
+        var str = ''
+        for (var i = 0; i <= 11; i++) {
+            console.log(i);
+            str += `
+        <dt>
+        <a href="detail.html">
+            <span class="top-tip tys">${data_[i].info_ty}</span>
+            <img src="${data_[i].img}" width="220" height="130" />
+            <div class="hot-con">
+                <h2 class="name">${data_[i].text}</h2>
+                <p class="tabs graw">
+                    <span>${data_[i].totalnum}</span>
+                    <span>${data_[i].num}</span>
+                </p>
+                <p class="sq"><span>${data_[i].apply}</span>申请</p>
+                <p class="current graw">查看试用名单</p>
+            </div>
+        </a>
+    </dt>
+        `
+        }
+        var dl_ = document.getElementsByTagName('dl')[0]
+        dl_.innerHTML = str
+    }
+    fn()
+
+
+    var more_btn = document.getElementsByClassName('more-btn')[0]
+    more_btn.onclick = function () {
+        var num = 2;
+        var time = setInterval(function () {
+            more_btn.className = 'more-btn loading'
+            more_btn.innerHTML = '正在加载中'
+            num--
+            if (num == 0) {
+                var str = ''
+                for (var i = 12; i < data.length; i++) {
+                    str += `
+        <dt>
+        <a href="detail.html">
+            <span class="top-tip tys">${data[i].info_ty}</span>
+            <img src="${data[i].img}" width="220" height="130" />
+            <div class="hot-con">
+                <h2 class="name">${data[i].text}</h2>
+                <p class="tabs graw">
+                    <span>${data[i].totalnum}</span>
+                    <span>${data[i].num}</span>
+                </p>
+                <p class="sq"><span>${data[i].apply}</span>申请</p>
+                <p class="current graw">查看试用名单</p>
+            </div>
+        </a>
+    </dt>
+        `
+                }
+                var dl_ = document.getElementsByTagName('dl')[0]
+                dl_.innerHTML += str
+                more_btn.className = ''
+                more_btn.innerHTML = '没有更多了'
+                more_btn.onclick = ''
+                clearInterval(time)
+            }
+        }, 1000)
+    }
+
+</script>

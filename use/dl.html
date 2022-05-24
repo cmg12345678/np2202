@@ -1,12 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>试用-大众试用</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/common.css" rel="stylesheet" />
     <link href="../css/themes.css" rel="stylesheet" />
     <link href="../css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/dl.css">
+    <title>Document</title>
 </head>
 
 <body>
@@ -19,9 +22,9 @@
             <nav>
                 <ul>
                     <li><a href="../index.html">首页</a></li>
-                    <li><a href="../play/index.html">酷玩</a></li>
+                    <li class="on"><a href="javascript:void(0);">酷玩</a></li>
                     <li><a href="../guid/index.html">导购</a></li>
-                    <li class="on"><a href="javascript:void(0);">试用</a></li>
+                    <li><a href="../use/index.html">试用</a></li>
                     <li><a href="../report/index.html">报告</a></li>
                 </ul>
             </nav>
@@ -29,47 +32,22 @@
             <a href="" class="search right">搜索</a>
         </div>
     </header>
-    <!--酷玩top-->
-    <section class="wrap play-top">
-        <h1>免费试用</h1>
-        <nav class="play-nav">
-            <a href="javascript:void(0);" class="on">大众试用</a>
-            <a href="tys.html">体验师专享</a>
-        </nav>
-    </section>
-    <section class="use-box">
-        <div class="wrap use-nav">
-            <a href="index.html">全部</a>
-            <a href="sq.html">申请中</a>
-            <a href="javascript:void(0);" class="on">试用中</a>
-            <a href="end.html">已结束</a>
+
+    <div class="div_1">
+        <div class="div_2">
+            <div class="div_3"></div>
+            <p>登录极果</p>
         </div>
-    </section>
-    <!--免费试用-->
-    <section class="report-box">
-        <div class="wrap use common pad25">
-            <dl>
-                <dt>
-                    <a href="detail.html">
-                        <span class="top-tip shoufa">首发</span>
-                        <img src="../img/hot7.jpg" width="220" height="130" />
-                        <div class="hot-con">
-                            <h2 class="name">Liquid Image 338 运动摄像眼镜</h2>
-                            <p class="tabs green">
-                                <span>2032</span>
-                                <span>20台</span>
-                            </p>
-                            <p class="sq"><span>1392</span>申请</p>
-                            <p class="current green">剩余时间2天</p>
-                        </div>
-                    </a>
-                </dt>
-            </dl>
-            <div class="playMore">
-                <span class="no-more">没有更多啦~</span>
-            </div>
+        <div class="div_4">
+            <input type="text" placeholder="手机号/用户名">
+            <input type="password" placeholder="密码">
+            <input type="checkbox" class="input_1">
+            <p class="p_1">记住密码</p>
+            <button>立即登录</button>
         </div>
-    </section>
+
+    </div>
+
     <!--底部-->
     <footer class="foot">
         <section class="wrap">
@@ -120,51 +98,48 @@
 </body>
 
 </html>
-
+<script src="../js/myCookie.js"></script>
 <script>
-    function fn() {
-        var ajax_ = new XMLHttpRequest() || new ActiveXObject('Microsoft.XMLHTTP')
-        ajax_.open('get', 'http://localhost:3000/useing/master')
-        ajax_.send()
-        ajax_.onreadystatechange = function () {
-            if (ajax_.readyState == 4) {
-                if (ajax_.status == 200) {
-                    //获取JSON里边的list数据赋值给 data
-                    var data = JSON.parse(ajax_.responseText)
-                    console.log(data);
-                    //调用render函数渲染数据
-                    render(data)
-                }
-            }
-        }
+
+    // 页面加载 就从cookie中取值
+    if (getCookie('fnn')) {
+        document.getElementsByTagName('input')[0].value = getCookie('user');
+        document.getElementsByTagName('input')[1].value = getCookie('pass');
+        document.getElementsByTagName('input')[2].checked = getCookie('fnn');
     }
 
 
-    function render(data_) {
-        var str = ''
-        for (var i of data_) {
-            console.log(i);
-            str += `
-        <dt>
-        <a href="detail.html">
-            <span class="top-tip tys">${i.info_ty}</span>
-            <img src="${i.img}" width="220" height="130" />
-            <div class="hot-con">
-                <h2 class="name">${i.text}</h2>
-                <p class="tabs graw">
-                    <span>${i.totalnum}</span>
-                    <span>${i.num}</span>
-                </p>
-                <p class="sq"><span>${i.apply}</span>申请</p>
-                <p class="current graw">查看试用名单</p>
-            </div>
-        </a>
-    </dt>
-        `
+    var input_11 = document.getElementsByTagName('input')
+    var button_ = document.getElementsByTagName('button')[0]
+    button_.onclick = function () {
+        if (input_11[0].value !== 'admin') {
+            alert('登录失败')
+        } else if (input_11[1].value !== '123456') {
+            alert('登录失败')
+        } else {
+            alert('登录成功！即将跳转....')
+            setTimeout(window.location.href = '../index.html')
         }
-        var dl_ = document.getElementsByTagName('dl')[0]
-        dl_.innerHTML = str
+
+
+        //1.找到获取用户名,密码,是否记住密码的值
+        var user_ = document.getElementsByTagName('input')[0].value
+        var pass_ = document.getElementsByTagName('input')[1].value
+        var fn_ = document.getElementsByTagName('input')[2].checked
+        console.log(user_);
+        console.log(pass_);
+        console.log(fn_);
+        // 2.判断 如果记住密码, 把用户名, 密码, 是否记住密码的值存储到cookie中
+        if (fn_) {
+            setCookie('user', user_)
+            setCookie('pass', pass_)
+            setCookie('fnn', fn_)
+        } else {
+            removeCookie('user')
+            removeCookie('pass')
+            removeCookie('fnn')
+
+        }
     }
-    fn()
 
 </script>

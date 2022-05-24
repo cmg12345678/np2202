@@ -31,6 +31,47 @@
             <a href="" class="search right">搜索</a>
         </div>
     </header>
+    <!-- 免费试用 -->
+    <section class="wrap play-top">
+        <h1>免费试用</h1>
+        <nav class="play-nav">
+            <a href="javascript:void(0);" class="on">大众试用</a>
+            <a href="tys.html">体验师专享</a>
+        </nav>
+    </section>
+    <section class="use-box">
+        <div class="wrap use-nav">
+            <a href="index.html">全部</a>
+            <a href="sq.html">申请中</a>
+            <a href="sy.html">试用中</a>
+            <a href="javascript:void(0);" class="on">已结束</a>
+        </div>
+    </section>
+    <!-- 中间部分 -->
+    <section class="report-box">
+        <div class="wrap use common pad25">
+            <dl>
+                <dt>
+                    <a href="detail.html">
+                        <span class="top-tip tys">体验师专享</span>
+                        <img src="../img/hot2.jpg" width="220" height="130" />
+                        <div class="hot-con">
+                            <h2 class="name">Osprey小鹰户外运动专业腰包</h2>
+                            <p class="tabs graw">
+                                <span>2032</span>
+                                <span>20台</span>
+                            </p>
+                            <p class="sq"><span>1392</span>申请</p>
+                            <p class="current graw">查看试用名单</p>
+                        </div>
+                    </a>
+                </dt>
+            </dl>
+            <div class="playMore">
+                <span class="no-more">没有更多啦~</span>
+            </div>
+        </div>
+    </section>
     <!--底部-->
     <footer class="foot">
         <section class="wrap">
@@ -81,3 +122,49 @@
 </body>
 
 </html>
+<script>
+    function fn() {
+        var ajax_ = new XMLHttpRequest() || new ActiveXObject('Microsoft.XMLHTTP')
+        ajax_.open('get', 'http://localhost:3000/useing/public')
+        ajax_.send()
+        ajax_.onreadystatechange = function () {
+            if (ajax_.readyState == 4) {
+                if (ajax_.status == 200) {
+                    //获取JSON里边的list数据赋值给 data
+                    var data = JSON.parse(ajax_.responseText)
+                    console.log(data);
+                    //调用render函数渲染数据
+                    render(data)
+                }
+            }
+        }
+    }
+
+
+    function render(data_) {
+        var str = ''
+        for (var i = 0; i <= 11; i++) {
+            console.log(i);
+            str += `
+        <dt>
+        <a href="detail.html">
+            <span class="top-tip tys">${data_[i].info_ty}</span>
+            <img src="${data_[i].img}" width="220" height="130" />
+            <div class="hot-con">
+                <h2 class="name">${data_[i].text}</h2>
+                <p class="tabs graw">
+                    <span>${data_[i].totalnum}</span>
+                    <span>${data_[i].num}</span>
+                </p>
+                <p class="sq"><span>${data_[i].apply}</span>申请</p>
+                <p class="current graw">查看试用名单</p>
+            </div>
+        </a>
+    </dt>
+        `
+        }
+        var dl_ = document.getElementsByTagName('dl')[0]
+        dl_.innerHTML = str
+    }
+    fn()
+</script>

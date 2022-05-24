@@ -1,0 +1,78 @@
+/* 登录 */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #F7F7F7;
+}
+
+.div_1 {
+    width: 80%;
+    height: 500px;
+    background-color: #FFFFFF;
+    margin: 30px auto;
+    position: relative;
+}
+
+.div_2 {
+    width: 100%;
+    height: 60px;
+    /* background-color: pink; */
+}
+
+.div_2>p {
+
+    font-size: 20px;
+    line-height: 60px;
+    margin-left: 30px;
+}
+
+.div_3 {
+    width: 8px;
+    height: 35px;
+    background-color: red;
+    float: left;
+    margin-top: 10px;
+}
+
+input {
+    display: block;
+    width: 250px;
+    height: 40px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border: 1px #eee solid;
+}
+
+.div_4 {
+    position: absolute;
+    left: 490px;
+    top: 130px;
+
+}
+
+button {
+    width: 250px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #FE5341;
+    border: 0;
+    color: #F7F7F7;
+    /* display: block; */
+}
+
+.input_1 {
+    width: 20px;
+    height: 20px;
+}
+
+.p_1 {
+    /* float: left; */
+    position: absolute;
+    top: 143px;
+    left: 25px;
+    font-size: 14px;
+}
